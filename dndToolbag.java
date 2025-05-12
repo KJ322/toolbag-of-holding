@@ -63,6 +63,7 @@ public class dndToolbag
             {
                 int choice = k.nextInt();
                 k.nextLine(); // Consume newline
+                System.out.println();
     
                 switch (choice) 
                 {
@@ -73,7 +74,7 @@ public class dndToolbag
                         inventory.main(null);
                         break;
                     case CHAR_SHEET:
-                        System.out.print("Call character sheet java file");
+                        characterSheet.main(null);
                         break;
                     case TRACKER:
                         System.out.print("Call insp/hp/xp tracker");
@@ -120,6 +121,7 @@ public class dndToolbag
             {
                 int choice = k.nextInt();
                 k.nextLine(); // Consume newline
+                System.out.println();
     
                 switch (choice) 
                 {

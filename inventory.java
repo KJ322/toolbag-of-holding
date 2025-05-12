@@ -7,6 +7,35 @@ public class inventory
 
     public static void main(String[] args) 
     {
+        // Load inventory from file at the start
+        try 
+        {
+            Map<String, String> sections = CharSheetManager.readCharSheet();
+            String inventorySection = sections.getOrDefault("Inventory:", "");
+            inventory.clear();
+            if (!inventorySection.isBlank()) 
+            {
+                String[] items = inventorySection.split("\\n");
+                for (String item : items) 
+                {
+                    // Remove leading "- " if present
+                    item = item.trim();
+                    if (item.startsWith("- ")) 
+                    {
+                        item = item.substring(2).trim();
+                    }
+                    if (!item.isEmpty()) 
+                    {
+                        inventory.add(item);
+                    }
+                }
+            }
+        } 
+        catch (IOException e) 
+        {
+            System.out.println("Could not load inventory from file.");
+        }
+
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
@@ -34,7 +63,7 @@ public class inventory
                     break;
                 case 4:
                     running = false;
-                    System.out.println("Exiting inventory tracker.");
+                    System.out.println("Exiting inventory tracker.\n");
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -69,16 +98,28 @@ public class inventory
     private static void viewInventory() 
     {
         System.out.println("\nCurrent Inventory:");
-        if (inventory.isEmpty()) 
+        Map<String, String> sections;
+        try 
         {
-            System.out.println("Inventory is empty.");
-        } 
-        else 
-        {
-            for (String item : inventory) 
+            sections = CharSheetManager.readCharSheet();
+            String inventorySection = sections.getOrDefault("Inventory:", "");
+            if (inventorySection.isBlank()) 
             {
-                System.out.println("- " + item);
+                System.out.println("Inventory is empty.");
+            } 
+            else 
+            {
+                String[] items = inventorySection.split("\\n");
+                for (String item : items) 
+                {
+                    System.out.println(item);
+                }
             }
+        } 
+        catch (IOException e) 
+        {
+            System.out.println("An error occurred while reading the inventory from file.");
+            e.printStackTrace();
         }
     }
 

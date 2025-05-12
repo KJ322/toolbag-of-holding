@@ -136,7 +136,7 @@ public class hitPoints
         try 
         {
             Map<String, String> sections = CharSheetManager.readCharSheet();
-            sections.put("Hit Points", "Hit Points: " + hitPoints);
+            sections.put("Hit Points: ", "" + hitPoints);
             CharSheetManager.writeCharSheet(sections);
             System.out.println("Hit points successfully written to charSheet.txt!");
         } 

@@ -87,12 +87,12 @@ public class inventory
         try 
         {
             Map<String, String> sections = CharSheetManager.readCharSheet();
-            StringBuilder inventorySection = new StringBuilder("Inventory:\n");
+            StringBuilder inventorySection = new StringBuilder("");
             for (String item : inventory) 
             {
                 inventorySection.append("- ").append(item).append("\n");
             }
-            sections.put("Inventory", inventorySection.toString().trim());
+            sections.put("Inventory:", inventorySection.toString().trim());
             CharSheetManager.writeCharSheet(sections);
         } 
         catch (IOException e) 

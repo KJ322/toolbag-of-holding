@@ -67,12 +67,12 @@ public class charNotes {
         try 
         {
             Map<String, String> sections = CharSheetManager.readCharSheet();
-            StringBuilder notesSection = new StringBuilder("Notes:\n");
+            StringBuilder notesSection = new StringBuilder("");
             for (String note : notes) 
             {
                 notesSection.append("- ").append(note).append("\n");
             }
-            sections.put("Notes", notesSection.toString().trim());
+            sections.put("Notes:", notesSection.toString().trim());
             CharSheetManager.writeCharSheet(sections);
         } 
         catch (IOException e) 

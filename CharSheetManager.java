@@ -8,7 +8,7 @@ public class CharSheetManager
     // Define the default structure of the file
     private static final LinkedHashMap<String, String> DEFAULT_SECTIONS = new LinkedHashMap<>() 
     {{
-        put("Character Info", "Character name: \nClass: ");
+        put("Character Info", "\n");
         put("Hit Points: ", "\n");
         put("Stats:", "\n");
         put("Inventory:", "\n");

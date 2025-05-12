@@ -124,7 +124,7 @@ public class rollStats
 
         try {
             Map<String, String> sections = CharSheetManager.readCharSheet();
-            sections.put("Assigned Stats", statsSection.toString().trim());
+            sections.put("Stats:", statsSection.toString().trim());
             CharSheetManager.writeCharSheet(sections);
         } catch (IOException e) {
             System.out.println("An error occurred while writing to the file.");

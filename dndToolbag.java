@@ -77,7 +77,7 @@ public class dndToolbag
                         characterSheet.main(null);
                         break;
                     case TRACKER:
-                        System.out.print("Call insp/hp/xp tracker");
+                        tracker.main(null);
                         break;
                     case COMBAT:
                         combatMode(k);
@@ -183,7 +183,7 @@ public class dndToolbag
         else if (choice == TRACK)
         {
             //TODO
-            System.out.print("Call insp/hp/xp tracker");
+            tracker.main(null);
         }
         else if (choice == FLEE)
         {

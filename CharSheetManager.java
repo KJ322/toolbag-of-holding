@@ -9,7 +9,9 @@ public class CharSheetManager
     private static final LinkedHashMap<String, String> DEFAULT_SECTIONS = new LinkedHashMap<>() 
     {{
         put("Character Info", "\n");
+        put("Armor Class: ", "\n");
         put("Hit Points: ", "\n");
+        put("Current HP: ", "\n");
         put("Stats:", "\n");
         put("Inventory:", "\n");
         put("Notes:", "\n");

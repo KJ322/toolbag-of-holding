@@ -114,7 +114,7 @@ public class rollStats
         }
 
         System.out.println("You have assigned the stats as follows:");
-        StringBuilder statsSection = new StringBuilder("Assigned Stats:\n");
+        StringBuilder statsSection = new StringBuilder("");
         for (int i = 0; i < statNames.length; i++) {
             int modifier = calculateModifier(assignedStats[i]);
             System.out.println(statNames[i] + ": " + assignedStats[i] + " (Modifier: " + modifier + ")");

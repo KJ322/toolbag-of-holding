@@ -9,10 +9,10 @@ public class CharSheetManager
     private static final LinkedHashMap<String, String> DEFAULT_SECTIONS = new LinkedHashMap<>() 
     {{
         put("Character Info", "Character name: \nClass: ");
-        put("Hit Points", "HP: ");
-        put("Assigned Stats", "Stats:\n");
-        put("Inventory", "Inventory:\n");
-        put("Notes", "Other Notes:\n");
+        put("Hit Points: ", "\n");
+        put("Stats:", "\n");
+        put("Inventory:", "\n");
+        put("Notes:", "\n");
     }};
 
     // Read the file and return its sections

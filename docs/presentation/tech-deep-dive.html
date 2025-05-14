@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toolbag of Holding | Technical Deep Dive</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- For code highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-java.min.js"></script>
+</head>
+<body>
+  <div class="presentation-container">
+    <!-- Sidebar navigation -->
+    <div class="sidebar">
+      <h2>Toolbag of Holding</h2>
+      <ul>
+        <li><a href="index.html">Introduction</a></li>
+        <li><a href="architecture.html">System Architecture</a></li>
+        <li><a href="character-creation.html">Character Creation</a></li>
+        <li><a href="play-mode.html">Play Mode Features</a></li>
+        <li><a href="tech-deep-dive.html" class="active">Technical Deep Dive</a></li>
+        <li><a href="refactoring.html">Refactoring & Improvements</a></li>
+        <li><a href="dice-system.html">Dice Rolling System</a></li>
+        <li><a href="data-storage.html">Data Management</a></li>
+        <li><a href="testing.html">Testing Approach</a></li>
+        <li><a href="lessons.html">Lessons Learned</a></li>
+        <li><a href="roadmap.html">Future Enhancements</a></li>
+        <li><a href="collaboration.html">Human-AI Collaboration</a></li>
+      </ul>
+    </div>
+    
+    <!-- Main content area -->
+    <div class="content">
+      <div class="slide">
+        <h1 class="slide-header">Technical Deep Dive: ScannerUtil</h1>
+        
+        <div class="slide-content">
+          <img src="https://placehold.co/800x400/7C2128/DBC07C?text=ScannerUtil" alt="Scanner Utility" style="width: 100%; max-width: 800px; display: block; margin: 20px auto;">
+          
+          <div class="key-points">
+            <h3>The Problem: Resource Management</h3>
+            <ul>
+              <li>Multiple Scanner objects created and not properly closed</li>
+              <li>Input validation repeated across files</li>
+              <li>Inconsistent error handling</li>
+              <li>Potential resource leaks</li>
+            </ul>
+          </div>
+          
+          <h3>The Solution: ScannerUtil Class</h3>
+          <ul>
+            <li>Singleton pattern for Scanner management</li>
+            <li>Centralized input validation</li>
+            <li>Consistent error handling</li>
+            <li>Guaranteed resource cleanup</li>
+          </ul>
+          
+          <h3>Implementation</h3>
+          <pre><code class="language-java">public class ScannerUtil {
+    private static Scanner scanner = null;
+    
+    /**
+     * Get the singleton Scanner instance.
+     * Creates a new Scanner if one doesn't exist yet.
+     */
+    public static Scanner getScanner() {
+        if (scanner == null) {
+            scanner = new Scanner(System.in);
+        }
+        return scanner;
+    }
+    
+    /**
+     * Get an integer input from the user with validation.
+     */
+    public static int getInt(String prompt) {
+        Scanner sc = getScanner();
+        while (true) {
+            System.out.print(prompt);
+            if (sc.hasNextInt()) {
+                int input = sc.nextInt();
+                sc.nextLine(); // Consume the newline
+                return input;
+            } else {
+                System.out.println("Invalid input. Please enter a number.");
+                sc.nextLine(); // Consume the invalid input
+            }
+        }
+    }
+    
+    // Additional utility methods...
+}</code></pre>
+          
+          <h3>Benefits</h3>
+          <div class="comparison">
+            <div class="comparison-before">
+              <h4>Before ScannerUtil</h4>
+              <ul>
+                <li>Multiple Scanners created and closed</li>
+                <li>Validation code duplicated across files</li>
+                <li>Resource leaks when exceptions occurred</li>
+                <li>Inconsistent error messages</li>
+              </ul>
+            </div>
+            <div class="comparison-after">
+              <h4>After ScannerUtil</h4>
+              <ul>
+                <li>Single Scanner instance throughout app</li>
+                <li>Consistent input validation code</li>
+                <li>Resource safety with finally blocks</li>
+                <li>Improved user experience</li>
+              </ul>
+            </div>
+          </div>
+          
+          <h3>Testing Approach</h3>
+          <p>The ScannerUtil class is tested using a specialized test framework that:</p>
+          <ul>
+            <li>Mocks user input for testing methods</li>
+            <li>Verifies input validation works correctly</li>
+            <li>Ensures proper Scanner cleanup</li>
+            <li>Checks edge cases and error handling</li>
+          </ul>
+        </div>
+        
+        <div class="nav-buttons">
+          <a href="architecture.html" class="nav-button prev">&larr; Previous</a>
+          <a href="refactoring.html" class="nav-button next">Next &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="js/presentation.js"></script>
+</body>
+</html>

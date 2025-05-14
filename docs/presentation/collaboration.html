@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toolbag of Holding | Human-AI Collaboration</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- For code highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-java.min.js"></script>
+</head>
+<body>
+  <div class="presentation-container">
+    <!-- Sidebar navigation -->
+    <div class="sidebar">
+      <h2>Toolbag of Holding</h2>
+      <ul>
+        <li><a href="index.html">Introduction</a></li>
+        <li><a href="architecture.html">System Architecture</a></li>
+        <li><a href="character-creation.html">Character Creation</a></li>
+        <li><a href="play-mode.html">Play Mode Features</a></li>
+        <li><a href="tech-deep-dive.html">Technical Deep Dive</a></li>
+        <li><a href="refactoring.html">Refactoring & Improvements</a></li>
+        <li><a href="dice-system.html">Dice Rolling System</a></li>
+        <li><a href="data-storage.html">Data Management</a></li>
+        <li><a href="testing.html">Testing Approach</a></li>
+        <li><a href="lessons.html">Lessons Learned</a></li>
+        <li><a href="roadmap.html">Future Enhancements</a></li>
+        <li><a href="collaboration.html" class="active">Human-AI Collaboration</a></li>
+      </ul>
+    </div>
+    
+    <!-- Main content area -->
+    <div class="content">
+      <div class="slide">
+        <h1 class="slide-header">Human-AI Collaboration</h1>
+        
+        <div class="slide-content">
+          <img src="https://placehold.co/800x400/7C2128/DBC07C?text=KJ+%26+Claude" alt="Collaboration" style="width: 100%; max-width: 800px; display: block; margin: 20px auto;">
+          
+          <div class="key-points">
+            <h3>Our Development Process</h3>
+            <p>This project represents a collaborative effort between human (KJ) and AI (Claude) developers, combining the strengths of both to create a better end product.</p>
+          </div>
+          
+          <h3>Collaboration Workflow</h3>
+          <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0;">
+            <div style="flex: 1; min-width: 250px; background-color: #f5f5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #2C3E50;">
+              <h4>1. Analysis</h4>
+              <p>Claude analyzed the existing codebase, identifying issues like resource leaks, code duplication, and architectural concerns.</p>
+            </div>
+            <div style="flex: 1; min-width: 250px; background-color: #f5f5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #2C3E50;">
+              <h4>2. Planning</h4>
+              <p>KJ provided high-level requirements and priorities; together they created documents like code improvements plan and testing strategy.</p>
+            </div>
+            <div style="flex: 1; min-width: 250px; background-color: #f5f5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #2C3E50;">
+              <h4>3. Implementation</h4>
+              <p>Claude implemented refactoring changes while KJ reviewed and suggested modifications to ensure domain compatibility.</p>
+            </div>
+            <div style="flex: 1; min-width: 250px; background-color: #f5f5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #2C3E50;">
+              <h4>4. Documentation</h4>
+              <p>Both contributed to documentation, with Claude generating technical docs and KJ ensuring they matched the project vision.</p>
+            </div>
+          </div>
+          
+          <h3>Strengths Each Brought</h3>
+          <div style="display: flex; gap: 20px;">
+            <div style="flex: 1; background-color: rgba(124, 33, 40, 0.1); padding: 20px; border-radius: 8px;">
+              <h4 style="text-align: center; color: #7C2128;">KJ's Contributions</h4>
+              <ul>
+                <li>Domain knowledge of D&D rules and mechanics</li>
+                <li>Project vision and requirements</li>
+                <li>Development environment setup</li>
+                <li>Strategic decision making</li>
+                <li>Code review and approval</li>
+                <li>Testing and validation</li>
+              </ul>
+            </div>
+            <div style="flex: 1; background-color: rgba(44, 62, 80, 0.1); padding: 20px; border-radius: 8px;">
+              <h4 style="text-align: center; color: #2C3E50;">Claude's Contributions</h4>
+              <ul>
+                <li>Code pattern recognition</li>
+                <li>Systematic refactoring</li>
+                <li>Documentation generation</li>
+                <li>Bug identification</li>
+                <li>Test creation</li>
+                <li>Implementation of best practices</li>
+              </ul>
+            </div>
+          </div>
+          
+          <h3>Lessons Learned</h3>
+          <ol>
+            <li><strong>Clear Communication</strong>: Explicit communication about goals, constraints, and preferences yields better results</li>
+            <li><strong>Iterative Approach</strong>: Breaking down tasks into manageable pieces allows for better focus and clearer feedback</li>
+            <li><strong>Complementary Skills</strong>: Human creativity and domain knowledge paired with AI's systematic thinking creates better code</li>
+            <li><strong>Documentation Importance</strong>: Thorough documentation is crucial for shared understanding and future maintenance</li>
+            <li><strong>Review Process</strong>: Regular review ensures the code meets both technical requirements and domain needs</li>
+          </ol>
+          
+          <h3>Best Practices for Human-AI Pair Programming</h3>
+          <ul>
+            <li>Be explicit about code style and patterns</li>
+            <li>Provide context for domain-specific requirements</li>
+            <li>Review code changes incrementally</li>
+            <li>Use AI's strength in repetitive tasks (like refactoring similar code patterns)</li>
+            <li>Have humans focus on architectural decisions and domain correctness</li>
+            <li>Document decision-making processes for future reference</li>
+          </ul>
+          
+          <div style="margin-top: 30px; padding: 20px; border-radius: 8px; background-color: #f5f5f5; text-align: center;">
+            <p style="font-size: 1.2em; margin-bottom: 0;">This project demonstrates how human-AI collaboration can create better software by leveraging the strengths of both partners.</p>
+          </div>
+        </div>
+        
+        <div class="nav-buttons">
+          <a href="roadmap.html" class="nav-button prev">&larr; Previous</a>
+          <a href="index.html" class="nav-button next">Back to Start</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="js/presentation.js"></script>
+</body>
+</html>

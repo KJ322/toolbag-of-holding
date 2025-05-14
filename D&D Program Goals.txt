@@ -7,8 +7,8 @@ modes: Play, Combat, and Char Creation (combat is a branch of play)
 
 Play:
 Rolling (done)
-check/add/remove items from inventory
-Check stats/mods/prof bonus
+check/add/remove items from inventory (done)
+Check stats/mods/prof bonus (done)
 Track inspiration/xp/hp
 Check char sheet (not complete)
 
@@ -20,13 +20,13 @@ Char creation:
 Rolling stats (done)
 option to manually enter stats
 Skill mods (done)
-Prof bonus
+Prof bonus (done)
 hp (done)
 manually enter hp
 Basically just making a character sheet
-Add starter items to inventory
-add section for notes like feats/languages/proficiencies
-How to format?
+Add starter items to inventory (done)
+add section for notes like feats/languages/proficiencies (done)
+How to format? (figured it out, done)
 
 framework for final program
 needs to be able to handle leveling up (so adding a point to a chosen stat and whatnot)

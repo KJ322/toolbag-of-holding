@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toolbag of Holding | Refactoring & Improvements</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- For code highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-java.min.js"></script>
+</head>
+<body>
+  <div class="presentation-container">
+    <!-- Sidebar navigation -->
+    <div class="sidebar">
+      <h2>Toolbag of Holding</h2>
+      <ul>
+        <li><a href="index.html">Introduction</a></li>
+        <li><a href="architecture.html">System Architecture</a></li>
+        <li><a href="character-creation.html">Character Creation</a></li>
+        <li><a href="play-mode.html">Play Mode Features</a></li>
+        <li><a href="tech-deep-dive.html">Technical Deep Dive</a></li>
+        <li><a href="refactoring.html" class="active">Refactoring & Improvements</a></li>
+        <li><a href="dice-system.html">Dice Rolling System</a></li>
+        <li><a href="data-storage.html">Data Management</a></li>
+        <li><a href="testing.html">Testing Approach</a></li>
+        <li><a href="lessons.html">Lessons Learned</a></li>
+        <li><a href="roadmap.html">Future Enhancements</a></li>
+        <li><a href="collaboration.html">Human-AI Collaboration</a></li>
+      </ul>
+    </div>
+    
+    <!-- Main content area -->
+    <div class="content">
+      <div class="slide">
+        <h1 class="slide-header">Refactoring & Improvements</h1>
+        
+        <div class="slide-content">
+          <img src="https://placehold.co/800x400/7C2128/DBC07C?text=Before+%26+After" alt="Before and After" style="width: 100%; max-width: 800px; display: block; margin: 20px auto;">
+          
+          <div class="key-points">
+            <h3>Key Refactoring Goals</h3>
+            <ul>
+              <li>Improve resource management and prevent leaks</li>
+              <li>Eliminate code duplication for better maintainability</li>
+              <li>Enhance error handling and input validation</li>
+              <li>Standardize project structure and organization</li>
+              <li>Add proper documentation and comments</li>
+            </ul>
+          </div>
+          
+          <h3>Scanner Management: Before vs After</h3>
+          <div class="comparison">
+            <div class="comparison-before">
+              <h4>Before</h4>
+              <pre><code class="language-java">// From original rollToAttack.java
+public static void rollAttack() {
+    Scanner in = new Scanner(System.in);
+    
+    System.out.println("What is your skill modifier? ");
+    int modifier = in.nextInt();
+    
+    // More code...
+    
+    in.close(); // Closed here, but needed later!
+}
+
+public static void rollAgain() {
+    Scanner in = new Scanner(System.in); // New Scanner created
+    
+    System.out.println("Would you like to roll again? (yes/no) ");
+    String answer = in.nextLine();
+    
+    // More code...
+    
+    in.close(); // Resource leak if exception occurs
+}</code></pre>
+            </div>
+            <div class="comparison-after">
+              <h4>After</h4>
+              <pre><code class="language-java">// From refactored rollToAttack.java
+public static void rollAttack() {
+    // Use centralized utility
+    int modifier = ScannerUtil.getInt("What is your skill modifier? ");
+    
+    // No need to create/close Scanner
+    // More code...
+}
+
+public static void askRollAgain() {
+    // Use yes/no helper function
+    boolean rollAgain = ScannerUtil.getYesNoInput(
+        "Would you like to make another attack roll?"
+    );
+    
+    // No resource management needed
+    // More code...
+}</code></pre>
+            </div>
+          </div>
+          
+          <h3>Code Duplication: Before vs After</h3>
+          <div class="comparison">
+            <div class="comparison-before">
+              <h4>Before</h4>
+              <pre><code class="language-java">// 5 nearly identical methods in original code
+public static void d8 (int numOfDice) {
+    final int SIDES = 8;
+    int roll, i, rollTotal = 0;
+
+    for (i = 0; i < numOfDice; i++) {
+        roll = (int)(Math.random() * SIDES) + 1;
+        System.out.println(roll);
+        rollTotal += roll;
+    }
+
+    System.out.println ("You rolled " + rollTotal);
+    rollAgain();
+}
+
+// Repeated for d4, d6, d10, d12, d20...</code></pre>
+            </div>
+            <div class="comparison-after">
+              <h4>After</h4>
+              <pre><code class="language-java">// Single method handles all dice types
+private static void rollDice(int sides, int numOfDice, int modifier) {
+    int roll, rollTotal = 0;
+
+    System.out.println("Rolling " + numOfDice + "d" + sides + ":");
+    
+    for (int i = 0; i < numOfDice; i++) {
+        roll = rollDie(sides);
+        System.out.println("Die " + (i+1) + ": " + roll);
+        rollTotal += roll;
+    }
+
+    int total = rollTotal;
+    if (sides == 20 && modifier != 0) {
+        total += modifier;
+        System.out.println("Roll total: " + rollTotal + 
+                         " + " + modifier + " = " + total);
+    } else {
+        System.out.println("Roll total: " + total);
+    }
+    
+    rollAgain();
+}
+
+// Helper method for single die
+private static int rollDie(int sides) {
+    return (int)(Math.random() * sides) + 1;
+}</code></pre>
+            </div>
+          </div>
+          
+          <h3>Project Structure: Before vs After</h3>
+          <div class="comparison">
+            <div class="comparison-before">
+              <h4>Before</h4>
+              <pre>toolbag-of-holding/
+├── CharSheetManager.java
+├── charInfo.java
+├── characterSheet.java
+├── diceRoller.java
+├── dndToolbag.java
+├── hitPoints.java
+├── inventory.java
+├── rollStats.java
+├── rollToAttack.java
+└── README.md</pre>
+            </div>
+            <div class="comparison-after">
+              <h4>After</h4>
+              <pre>toolbag-of-holding/
+├── build/                  # Compiled output
+├── docs/                   # Documentation
+├── src/                    # Source code
+│   ├── main/
+│   │   └── java/           # Application source files
+│   └── test/
+│       └── java/           # Test source files
+├── README.md               # Project documentation
+├── run.sh                  # Script to compile and run the app
+└── runtests.sh             # Script to run tests</pre>
+            </div>
+          </div>
+          
+          <h3>Error Handling: Before vs After</h3>
+          <div class="comparison">
+            <div class="comparison-before">
+              <h4>Before</h4>
+              <pre><code class="language-java">// Original CharSheetManager.java
+public static void writeCharSheet(Map<String, String> sections) throws IOException 
+{
+    try (FileWriter writer = new FileWriter(FILE_PATH)) 
+    {
+        for (Map.Entry<String, String> entry : DEFAULT_SECTIONS.entrySet()) 
+        {
+            String sectionName = entry.getKey();
+            String content = sections.getOrDefault(sectionName, entry.getValue()).trim();
+            writer.write(sectionName + "\n");
+            writer.write(content + "\n\n");
+        }
+    }
+}</code></pre>
+            </div>
+            <div class="comparison-after">
+              <h4>After</h4>
+              <pre><code class="language-java">// Refactored CharSheetManager.java
+public static void writeCharSheet(Map<String, String> sections, String filePath) throws IOException 
+{
+    // Create a backup of the existing file if it exists
+    File file = new File(filePath);
+    if (file.exists()) {
+        createBackup(filePath);
+    }
+    
+    // Create directory if needed
+    File parentDir = file.getParentFile();
+    if (parentDir != null && !parentDir.exists()) {
+        parentDir.mkdirs();
+    }
+
+    // Write the file
+    try (FileWriter writer = new FileWriter(filePath)) 
+    {
+        for (Map.Entry<String, String> entry : DEFAULT_SECTIONS.entrySet()) 
+        {
+            String sectionName = entry.getKey();
+            String content = sections.getOrDefault(sectionName, entry.getValue()).trim();
+            
+            writer.write(sectionName + "\n");
+            writer.write(content + "\n\n");
+        }
+    }
+    catch (IOException e) 
+    {
+        // Handle specific error conditions
+        if (file.exists() && !file.canWrite()) {
+            throw new IOException("Cannot write to character sheet file: " + 
+                      filePath + " (Permission denied)", e);
+        } else {
+            throw new IOException("Failed to write character sheet: " + 
+                      e.getMessage(), e);
+        }
+    }
+}</code></pre>
+            </div>
+          </div>
+          
+          <h3>Key Improvements</h3>
+          <ul>
+            <li><strong>Resource Management:</strong> Centralized Scanner handling with ScannerUtil</li>
+            <li><strong>Code Reuse:</strong> Eliminated duplicate dice rolling code</li>
+            <li><strong>Error Handling:</strong> Added specific error messages and proper exception handling</li>
+            <li><strong>Data Safety:</strong> Implemented file backups before saving</li>
+            <li><strong>Input Validation:</strong> Added consistent user input validation</li>
+            <li><strong>Documentation:</strong> Added JavaDoc comments and improved project documentation</li>
+            <li><strong>Project Structure:</strong> Reorganized into standard Java project layout</li>
+            <li><strong>Testing:</strong> Added basic test framework and initial tests</li>
+          </ul>
+        </div>
+        
+        <div class="nav-buttons">
+          <a href="tech-deep-dive.html" class="nav-button prev">&larr; Previous</a>
+          <a href="dice-system.html" class="nav-button next">Next &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="js/presentation.js"></script>
+</body>
+</html>

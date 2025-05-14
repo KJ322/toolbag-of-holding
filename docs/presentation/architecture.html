@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toolbag of Holding | System Architecture</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- For code highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-java.min.js"></script>
+</head>
+<body>
+  <div class="presentation-container">
+    <!-- Sidebar navigation -->
+    <div class="sidebar">
+      <h2>Toolbag of Holding</h2>
+      <ul>
+        <li><a href="index.html">Introduction</a></li>
+        <li><a href="architecture.html" class="active">System Architecture</a></li>
+        <li><a href="character-creation.html">Character Creation</a></li>
+        <li><a href="play-mode.html">Play Mode Features</a></li>
+        <li><a href="tech-deep-dive.html">Technical Deep Dive</a></li>
+        <li><a href="refactoring.html">Refactoring & Improvements</a></li>
+        <li><a href="dice-system.html">Dice Rolling System</a></li>
+        <li><a href="data-storage.html">Data Management</a></li>
+        <li><a href="testing.html">Testing Approach</a></li>
+        <li><a href="lessons.html">Lessons Learned</a></li>
+        <li><a href="roadmap.html">Future Enhancements</a></li>
+        <li><a href="collaboration.html">Human-AI Collaboration</a></li>
+      </ul>
+    </div>
+    
+    <!-- Main content area -->
+    <div class="content">
+      <div class="slide">
+        <h1 class="slide-header">System Architecture & Design</h1>
+        
+        <div class="slide-content">
+          <img src="https://placehold.co/800x400/7C2128/DBC07C?text=Architecture+Diagram" alt="Architecture Diagram" style="width: 100%; max-width: 800px; display: block; margin: 20px auto;">
+          
+          <h3>Main Components</h3>
+          <ul>
+            <li><strong>dndToolbag.java</strong>: Main entry point with menu systems</li>
+            <li><strong>CharSheetManager.java</strong>: Data persistence layer</li>
+            <li><strong>ScannerUtil.java</strong>: User input management</li>
+            <li><strong>Utility Classes</strong>: Specialized tools for D&D mechanics</li>
+          </ul>
+          
+          <h3>Architecture Flow</h3>
+          <pre style="text-align: center;">
+┌───────────────┐     ┌─────────────┐     ┌────────────────┐
+│ User Interface│     │ Game Logic  │     │ Data Management│
+│ dndToolbag.java◄────┤ Utility     ├────►│ CharSheetManager│
+└───────────────┘     │ Classes     │     │ File I/O       │
+                      └─────────────┘     └────────────────┘</pre>
+          
+          <div class="key-points">
+            <h3>Design Principles</h3>
+            <ul>
+              <li><strong>Modularity</strong>: Each class handles a specific D&D mechanic</li>
+              <li><strong>Simplicity</strong>: Text-based UI for accessibility</li>
+              <li><strong>Persistence</strong>: Character data stored in formatted text files</li>
+              <li><strong>Resource Management</strong>: Centralized input handling</li>
+            </ul>
+          </div>
+          
+          <h3>Directory Structure</h3>
+          <pre>
+toolbag-of-holding/
+├── build/                  # Compiled output
+├── docs/                   # Documentation
+├── src/                    # Source code
+│   ├── main/
+│   │   └── java/           # Application source files
+│   └── test/
+│       └── java/           # Test source files
+├── README.md               # Project documentation
+├── run.sh                  # Script to compile and run the app
+└── runtests.sh             # Script to run tests</pre>
+          
+          <h3>Code Structure Example</h3>
+          <pre><code class="language-java">// Main program flow in dndToolbag.java
+public class dndToolbag 
+{    
+    // Main modes of operation
+    private static final int PLAY = 1;
+    private static final int CREATE = 2;
+    private static final int EXIT = 3;
+    
+    public static void main(String[] args)
+    {
+        try {
+            showMainMenu();
+        } finally {
+            // Ensure scanner is closed when application exits
+            ScannerUtil.closeScanner();
+        }
+    }
+    
+    // Menu system showing the architecture...
+}</code></pre>
+        </div>
+        
+        <div class="nav-buttons">
+          <a href="index.html" class="nav-button prev">&larr; Previous</a>
+          <a href="character-creation.html" class="nav-button next">Next &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="js/presentation.js"></script>
+</body>
+</html>

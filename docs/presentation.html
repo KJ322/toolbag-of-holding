@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toolbag of Holding Presentation</title>
+  <style>
+    body {
+      font-family: 'Calibri', Arial, sans-serif;
+      background-color: #F5F1E6;
+      color: #1A1A1A;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 800px;
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    
+    h1 {
+      color: #7C2128;
+      margin-top: 0;
+      font-size: 2.5em;
+    }
+    
+    h2 {
+      color: #2C3E50;
+      font-size: 1.8em;
+    }
+    
+    .subtitle {
+      color: #666;
+      margin-bottom: 40px;
+    }
+    
+    .enter-button {
+      display: inline-block;
+      padding: 15px 30px;
+      background-color: #7C2128;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1.2em;
+      transition: background-color 0.3s;
+      margin-top: 20px;
+    }
+    
+    .enter-button:hover {
+      background-color: #5f191f;
+    }
+    
+    .authors {
+      margin-top: 40px;
+      font-style: italic;
+      color: #666;
+    }
+    
+    .logo {
+      max-width: 200px;
+      margin-bottom: 20px;
+    }
+    
+    .slide-preview {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin: 40px 0;
+    }
+    
+    .preview-card {
+      width: 150px;
+      height: 100px;
+      background-color: #F5F1E6;
+      border: 1px solid #DBC07C;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      color: #7C2128;
+      text-decoration: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .preview-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://placehold.co/200x200/7C2128/DBC07C?text=D%26D" alt="D&D Logo" class="logo">
+    <h1>Toolbag of Holding</h1>
+    <h2>A D&D Character Management System</h2>
+    <p class="subtitle">A comprehensive presentation about our Java-based D&D character management toolset</p>
+    
+    <div class="slide-preview">
+      <a href="presentation/index.html" class="preview-card">Introduction</a>
+      <a href="presentation/architecture.html" class="preview-card">Architecture</a>
+      <a href="presentation/tech-deep-dive.html" class="preview-card">Technical Deep Dive</a>
+      <a href="presentation/refactoring.html" class="preview-card">Refactoring</a>
+    </div>
+    
+    <p>Explore our interactive presentation to learn about the design, implementation, and features of the Toolbag of Holding project.</p>
+    
+    <a href="presentation/index.html" class="enter-button">Start Presentation</a>
+    
+    <p class="authors">Created by Claude & KJ</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toolbag of Holding | Character Creation</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- For code highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-java.min.js"></script>
+</head>
+<body>
+  <div class="presentation-container">
+    <!-- Sidebar navigation -->
+    <div class="sidebar">
+      <h2>Toolbag of Holding</h2>
+      <ul>
+        <li><a href="index.html">Introduction</a></li>
+        <li><a href="architecture.html">System Architecture</a></li>
+        <li><a href="character-creation.html" class="active">Character Creation</a></li>
+        <li><a href="play-mode.html">Play Mode Features</a></li>
+        <li><a href="tech-deep-dive.html">Technical Deep Dive</a></li>
+        <li><a href="refactoring.html">Refactoring & Improvements</a></li>
+        <li><a href="dice-system.html">Dice Rolling System</a></li>
+        <li><a href="data-storage.html">Data Management</a></li>
+        <li><a href="testing.html">Testing Approach</a></li>
+        <li><a href="lessons.html">Lessons Learned</a></li>
+        <li><a href="roadmap.html">Future Enhancements</a></li>
+        <li><a href="collaboration.html">Human-AI Collaboration</a></li>
+      </ul>
+    </div>
+    
+    <!-- Main content area -->
+    <div class="content">
+      <div class="slide">
+        <h1 class="slide-header">Character Creation Process</h1>
+        
+        <div class="slide-content">
+          <img src="https://placehold.co/800x400/7C2128/DBC07C?text=Character+Creation" alt="Character Creation" style="width: 100%; max-width: 800px; display: block; margin: 20px auto;">
+          
+          <h3>Character Creation Flow</h3>
+          <div style="display: flex; justify-content: center; margin: 20px 0;">
+            <div style="width: 80%; padding: 15px; background-color: #f5f5f5; border-radius: 8px;">
+              <pre style="background: none; border: none; margin: 0; padding: 0; text-align: center;">
+┌─────────────────┐     ┌───────────────┐     ┌────────────────┐     ┌───────────────┐     ┌────────────┐
+│ Character Info  │ ──► │  Roll Stats   │ ──► │ Calculate HP   │ ──► │ Set Inventory │ ──► │ Add Notes  │
+└─────────────────┘     └───────────────┘     └────────────────┘     └───────────────┘     └────────────┘
+      │                       │                      │                       │                    │
+      ▼                       ▼                      ▼                       ▼                    ▼
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                     Character Sheet File                                             │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────┘</pre>
+            </div>
+          </div>
+          
+          <div class="key-points">
+            <h3>Key Components</h3>
+            <ul>
+              <li><strong>charInfo.java</strong>: Collects basic character information (name, class)</li>
+              <li><strong>rollStats.java</strong>: Handles ability score generation and assignment</li>
+              <li><strong>hitPoints.java</strong>: Calculates hit points based on class and constitution</li>
+              <li><strong>inventory.java</strong>: Manages initial equipment and items</li>
+              <li><strong>charNotes.java</strong>: Records character details, proficiencies, and features</li>
+            </ul>
+          </div>
+          
+          <h3>Stat Rolling System</h3>
+          <p>The stat rolling process follows standard D&D 5e rules:</p>
+          <ol>
+            <li>Roll 4d6 for each ability score</li>
+            <li>Drop the lowest die from each roll</li>
+            <li>Calculate the total (sum of the three highest dice)</li>
+            <li>Repeat for all six ability scores</li>
+            <li>Optionally re-roll scores below 7</li>
+            <li>Assign scores to abilities (STR, DEX, CON, INT, WIS, CHA)</li>
+            <li>Calculate modifiers using the formula: (score - 10) / 2</li>
+          </ol>
+          
+          <h3>Code Implementation</h3>
+          <pre><code class="language-java">// Character creation process from dndToolbag.java
+public static void charCreation() 
+{
+    boolean running = true;
+    
+    // Step 1: Gather basic character info
+    charInfo.main(null);
+
+    while (running) 
+    {
+        System.out.println("You are in character creation mode.\nYou can:");
+        System.out.println("1. Roll stats");
+        System.out.println("2. Calculate HP");
+        System.out.println("3. Start your inventory");
+        System.out.println("4. Make notes");
+        System.out.println("5. Finished");
+        
+        int choice = ScannerUtil.getIntInRange("Choose an option: ", 1, 5);
+        
+        // Process user selection...
+    }
+}</code></pre>
+          
+          <h3>Data Persistence</h3>
+          <p>Each component writes to the character sheet file using the CharSheetManager:</p>
+          <pre><code class="language-java">public static void writeToFile(String charName, String charClass) 
+{
+    try 
+    {
+        Map<String, String> sections = CharSheetManager.readCharSheet();
+        sections.put("Character Info", "Character name: " + charName + "\nClass: " + charClass);
+        CharSheetManager.writeCharSheet(sections);
+    } 
+    catch (IOException e) 
+    {
+        System.out.println("An error occurred while writing to the file.");
+        e.printStackTrace();
+    }
+}</code></pre>
+        </div>
+        
+        <div class="nav-buttons">
+          <a href="architecture.html" class="nav-button prev">&larr; Previous</a>
+          <a href="play-mode.html" class="nav-button next">Next &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="js/presentation.js"></script>
+</body>
+</html>
